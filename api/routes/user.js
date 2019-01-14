@@ -77,6 +77,8 @@ router.post('/login', (req,res,nex)=>{
                             expiresIn: '1h'
                         }
                     );
+                    res.set('Authorization', `Bearer ${token}`);
+                    console.log(res.get('Authorization'));
                     return res.status(200).json({
                         message: 'Auth successful !',
                         token: token
