@@ -19,7 +19,7 @@ mongoose.connect(dbUrl,{
         console.log('Connection success!');
     }).catch(err => {
         console.log('Connection error: ',err);
-    })
+    });
 
 mongoose.Promise = global.Promise;
 app.use(morgan('dev'));
@@ -39,7 +39,8 @@ app.use((req, res, next) => {
         res.status(200).json({});
     }
     next();
-})
+});
+
 // Routes
 app.use('/products', productRoutes);
 app.use('/orders', ordersRoutes);
@@ -49,7 +50,7 @@ app.use((req, res, next) => {
     const error = new Error('Not found');
     error.status = 404;
     next(error);
-})
+});
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
